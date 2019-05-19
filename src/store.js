@@ -15,5 +15,5 @@ export const getTreatmentFromStore = ({ featureName, userId }) => {
   if (!isStoreLoaded) {
     loadStore(toggleyApi, { userId });
   }
-  return store[featureName];
+  return store[featureName] || false;
 };

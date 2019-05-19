@@ -15,3 +15,16 @@ it('should return true when a feature is set for the user', () => {
 
   expect(treatment).toBe(true);
 });
+
+it('should return false when a feature is set for the user to be false', () => {
+  toggleyApi.getTreatmentsFromService.mockReturnValue({
+    featureABC: false,
+  });
+
+  const treatment = getTreatmentFromStore({
+    featureName: 'featureXYZ',
+    userId: 'user123',
+  });
+
+  expect(treatment).toBe(false);
+});

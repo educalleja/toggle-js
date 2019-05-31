@@ -12,4 +12,4 @@ const getConfig = () => ({
   },
 });
 
-export const getTreatmentsFromService = async () => http.get(`${URI}/treatments`, getConfig());
+export const getTreatmentsFromService = async ({ userId }) => http.get(`${URI}/treatments/${userId}`, getConfig());

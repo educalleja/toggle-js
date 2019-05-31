@@ -1,3 +1,5 @@
-import { toggley } from './toggleyApi';
+import { getTreatmentsFromService } from './toggleyApi';
 
-export const toggleyApi = toggley;
+export const toggleyApi = {
+  getTreatmentsFromService,
+};

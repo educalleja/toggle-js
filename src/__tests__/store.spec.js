@@ -1,43 +1,43 @@
 import { getTreatmentFromStore } from '../store';
 
-it('should return true when a feature is set for the user', () => {
+it('should return true when a feature is set for the user', async () => {
   const userId = 'user123';
   const featureName = 'featureABC';
   const featureProvider = {
-    getTreatmentsFromService: () => ({
+    getTreatmentsFromService: () => Promise.resolve({
       featureABC: true,
     }),
   };
 
-  const treatment = getTreatmentFromStore({ featureProvider, featureName, userId });
+  const treatment = await getTreatmentFromStore({ featureProvider, featureName, userId });
 
   expect(treatment).toBe(true);
 });
 
-it('should return false when a feature is set for the user to be false', () => {
+it('should return false when a feature is set for the user to be false', async () => {
   const userId = 'user123';
   const featureName = 'featureXYZ';
   const featureProvider = {
-    getTreatmentsFromService: () => ({
+    getTreatmentsFromService: () => Promise.resolve({
       featureXYZ: false,
     }),
   };
 
-  const treatment = getTreatmentFromStore({ featureProvider, featureName, userId });
+  const treatment = await getTreatmentFromStore({ featureProvider, featureName, userId });
 
   expect(treatment).toBe(false);
 });
 
-it('should return false when a feature is not set', () => {
+it('should return false when a feature is not set', async () => {
   const userId = 'user123';
   const featureName = 'featureXYZ';
   const featureProvider = {
-    getTreatmentsFromService: () => ({
+    getTreatmentsFromService: () => Promise.resolve({
       featureABC: true,
     }),
   };
 
-  const treatment = getTreatmentFromStore({ featureProvider, featureName, userId });
+  const treatment = await getTreatmentFromStore({ featureProvider, featureName, userId });
 
   expect(treatment).toBe(false);
 });

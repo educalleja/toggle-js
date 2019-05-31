@@ -1,9 +1,6 @@
+const URL = 'https://toggley.io/';
 
-const TOGGLEY_URL = `https://toggley.io/`
-
-const getEndpointUrl = path => `${TOGGLEY_URL}${path}`;
-
-const getTreatmentsFromService = () => {};
+const getTreatmentsFromService = async () => {};
 
 export const toggley = {
   getTreatmentsFromService,

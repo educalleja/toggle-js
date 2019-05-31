@@ -1,3 +1,3 @@
 import { isEnabledForUser } from './treatments';
 
-export const isEnabled = (featureName, userId) => isEnabledForUser({ featureName, userId });
+export const isEnabled = async (featureName, userId) => isEnabledForUser({ featureName, userId });

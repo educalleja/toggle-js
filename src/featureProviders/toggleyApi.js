@@ -1,7 +1,15 @@
-const URL = 'https://toggley.io/';
+import http from '../services/http';
 
-const getTreatmentsFromService = async () => {};
+const URI = 'https://toggley.io';
 
-export const toggley = {
-  getTreatmentsFromService,
-};
+const getAuthHeaders = () => ({
+  Authorization: 'Bearer AbCdEf123456',
+});
+
+const getConfig = () => ({
+  headers: {
+    ...getAuthHeaders(),
+  },
+});
+
+export const getTreatmentsFromService = async () => http.get(`${URI}/treatments`, getConfig());

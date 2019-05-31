@@ -1,30 +1,22 @@
-import { getTreatmentFromStore } from '../store';
-
-const getFeatureProvider = features => ({
-  getTreatmentsFromService: () => Promise.resolve({
-    ...features,
-  }),
-});
+import { getTreatmentFromStore, setStore } from '../store';
 
 test.each([[true], [false]])(
   'should return %s when a feature is set to the same value.',
-  async (treatementStatus) => {
+  (treatementStatus) => {
     const userId = 'user123';
     const featureName = 'featureABC';
-    const featureProvider = getFeatureProvider({ featureABC: treatementStatus });
-
-    const treatment = await getTreatmentFromStore({ featureProvider, featureName, userId });
+    setStore({ featureABC: treatementStatus });
+    const treatment = getTreatmentFromStore({ featureName, userId });
 
     expect(treatment).toBe(treatementStatus);
   },
 );
 
-it('should return false when a feature is not set', async () => {
+it('should return false when a feature is not set', () => {
   const userId = 'user123';
   const featureName = 'featureXYZ';
-  const featureProvider = getFeatureProvider({ featureABC: false });
-
-  const treatment = await getTreatmentFromStore({ featureProvider, featureName, userId });
+  setStore({ featureABC: false });
+  const treatment = getTreatmentFromStore({ featureName, userId });
 
   expect(treatment).toBe(false);
 });

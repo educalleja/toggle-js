@@ -1,13 +1,7 @@
 let store = {};
 
-const transformPayloadToStore = payload => payload;
+export const getTreatmentFromStore = ({ featureName }) => store[featureName] || false;
 
-const loadStore = async ({ featureProvider, userId }) => {
-  const payload = await featureProvider.getTreatmentsFromService({ userId });
-  store = transformPayloadToStore(payload);
-};
-
-export const getTreatmentFromStore = async ({ featureProvider, featureName, userId }) => {
-  await loadStore({ featureProvider, userId });
-  return store[featureName] || false;
+export const setStore = (newStore) => {
+  store = newStore;
 };

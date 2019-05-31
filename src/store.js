@@ -1,6 +1,6 @@
 let store = {};
 
-const transformPayloadToStore = payload => payload || {};
+const transformPayloadToStore = payload => payload;
 
 const loadStore = async ({ featureProvider, userId }) => {
   const payload = await featureProvider.getTreatmentsFromService({ userId });

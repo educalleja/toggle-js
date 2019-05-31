@@ -1,16 +1,15 @@
-import { toggleyApi } from '../featureProviders';
 import { getTreatmentFromStore } from '../store';
-
-jest.mock('../featureProviders');
 
 it('should return true when a feature is set for the user', () => {
   const userId = 'user123';
   const featureName = 'featureABC';
-  toggleyApi.getTreatmentsFromService.mockReturnValue({
-    featureABC: true,
-  });
+  const featureProvider = {
+    getTreatmentsFromService: () => ({
+      featureABC: true,
+    }),
+  };
 
-  const treatment = getTreatmentFromStore({ featureName, userId });
+  const treatment = getTreatmentFromStore({ featureProvider, featureName, userId });
 
   expect(treatment).toBe(true);
 });
@@ -18,24 +17,27 @@ it('should return true when a feature is set for the user', () => {
 it('should return false when a feature is set for the user to be false', () => {
   const userId = 'user123';
   const featureName = 'featureXYZ';
-  toggleyApi.getTreatmentsFromService.mockReturnValue({
-    featureABC: false,
-  });
+  const featureProvider = {
+    getTreatmentsFromService: () => ({
+      featureXYZ: false,
+    }),
+  };
 
-  const treatment = getTreatmentFromStore({ featureName, userId });
+  const treatment = getTreatmentFromStore({ featureProvider, featureName, userId });
 
   expect(treatment).toBe(false);
 });
 
-it('should only call once the service when requesting for two features', () => {
+it('should return false when a feature is not set', () => {
   const userId = 'user123';
-  const featureName = 'featureABC';
-  toggleyApi.getTreatmentsFromService.mockReturnValue({
-    featureABC: false,
-  });
+  const featureName = 'featureXYZ';
+  const featureProvider = {
+    getTreatmentsFromService: () => ({
+      featureABC: true,
+    }),
+  };
 
-  getTreatmentFromStore({ featureName, userId });
-  getTreatmentFromStore({ featureName: 'second', userId });
+  const treatment = getTreatmentFromStore({ featureProvider, featureName, userId });
 
-  expect(toggleyApi.getTreatmentsFromService).toHaveBeenCalledTimes(1);
+  expect(treatment).toBe(false);
 });

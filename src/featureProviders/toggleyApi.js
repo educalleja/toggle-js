@@ -1,6 +1,6 @@
 import http from '../services/http';
 
-const URI = 'https://toggley.io';
+const SERVICE_URL = 'https://toggley.io';
 
 const getAuthHeaders = () => ({
   Authorization: 'Bearer AbCdEf123456',
@@ -12,4 +12,4 @@ const getConfig = () => ({
   },
 });
 
-export const getTreatmentsFromService = async ({ userId }) => http.get(`${URI}/treatments/${userId}`, getConfig());
+export const getTreatmentsFromService = async ({ userId }) => http.get(`${SERVICE_URL}/treatments/${userId}`, getConfig());

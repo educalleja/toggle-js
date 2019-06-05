@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export default {
-  get: async (path, config) => axios.get(path, config),
+  get: async (path, options) => axios.get(path, options),
 };

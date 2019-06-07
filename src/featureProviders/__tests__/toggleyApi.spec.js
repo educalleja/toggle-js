@@ -9,9 +9,7 @@ test('Requests are done to production endpoints with headers', async () => {
 
   await api.getTreatmentsFromService({ userId: 'userABC' });
 
-  expect(httpLib.get).toHaveBeenCalledWith('https://toggley.io/treatments/userABC', {
-    headers: {},
-  });
+  expect(httpLib.get).toHaveBeenCalledWith('https://toggley.io/treatments/userABC', {});
 });
 
 test('Requests treatments from API', async () => {

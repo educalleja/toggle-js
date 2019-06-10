@@ -1,11 +1,10 @@
-import { getTreatmentFromStore, setStore } from './store';
-import { toggleyApi } from './featureProviders';
+export const isEnabledForUser = async ({
+  store, httpService, featureName, userId,
+}) => {
+  if (!store.isLoaded()) {
+    const newFeatures = httpService.getTreatmentsFromService({ userId });
+    store.setStore(newFeatures);
+  }
 
-export const isEnabledForUser = async ({ featureName, userId }) => {
-  setStore(await toggleyApi.getTreatmentsFromService({ userId }));
-  return getTreatmentFromStore({
-    featureProvider: toggleyApi,
-    featureName,
-    userId,
-  });
+  return store.getTreatmentFromStore({ featureName });
 };

@@ -1,9 +1,9 @@
-import axios from 'axios';
+import httpLib from '../services/http';
 import toggleyAPI from './toggleyApi';
 
 export const toggleyApi = {
-  getTreatmentsFromService: () => {
-    const api = toggleyAPI({ httpLib: axios });
+  getTreatmentsFromService: async () => {
+    const api = toggleyAPI({ httpLib });
     return api.getTreatmentsFromService();
   },
 };

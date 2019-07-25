@@ -41,14 +41,12 @@ test('Gets the same result when called multiple times without calling API multip
   const storage = store();
 
   for (let i = 0; i < 50; i += 1) {
-    results.push(
-      isEnabledForUser({
-        store: storage,
-        httpService,
-        featureName: 'abc',
-        userId: 123,
-      }),
-    );
+    await isEnabledForUser({ // eslint-disable-line no-await-in-loop
+      store: storage,
+      httpService,
+      featureName: 'abc',
+      userId: 123,
+    });
   }
   const treatments = await Promise.all(results);
 

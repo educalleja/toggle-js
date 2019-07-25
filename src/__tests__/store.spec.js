@@ -3,15 +3,15 @@ import store from '../store';
 
 test.each([[true], [false]])(
   'should return %s when a feature is set to the same value.',
-  (treatementStatus) => {
+  (treatmentStatus) => {
     const userId = 'user123';
     const featureName = 'featureABC';
     const myStore = store();
 
-    myStore.setStore({ featureABC: treatementStatus });
+    myStore.setStore({ featureABC: treatmentStatus });
     const treatment = myStore.getTreatmentFromStore({ featureName, userId });
 
-    expect(treatment).toBe(treatementStatus);
+    expect(treatment).toBe(treatmentStatus);
   },
 );
 

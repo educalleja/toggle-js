@@ -1,12 +1,8 @@
 import store from './store';
-import { isEnabledForUser } from './treatments';
+import { treatments } from './treatments';
 import { toggleyApi } from './featureProviders';
 
-const featuresStore = store();
-
-export const isEnabled = async (featureName, userId) => isEnabledForUser({
-  store: featuresStore,
-  httpService: toggleyApi,
-  featureName,
-  userId,
-});
+export const isEnabled = async (featureName, userId) => {
+  const treats = treatments(toggleyApi, store());
+  return treats.isEnabledForUser({ featureName, userId });
+};

@@ -1,10 +1,14 @@
-export const isEnabledForUser = async ({
-  store, httpService, featureName, userId,
-}) => {
-  if (!store.isLoaded()) {
-    const newFeatures = await httpService.getTreatmentsFromService({ userId });
-    store.setStore(newFeatures);
-  }
+export const treatments = (httpService, store) => {
+  const isEnabledForUser = async ({ featureName, userId }) => {
+    if (!store.isLoaded()) {
+      const newFeatures = await httpService.getTreatmentsFromService({ userId });
+      store.setStore(newFeatures);
+    }
 
-  return store.getTreatmentFromStore({ featureName });
+    return store.getTreatmentFromStore({ featureName });
+  };
+
+  return {
+    isEnabledForUser,
+  };
 };

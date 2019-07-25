@@ -1,4 +1,4 @@
-import { treatments } from '../treatments';
+import treatments from '../treatments';
 import store from '../store';
 
 test.each([true, false])('Gets %s treatments', async (treatmentValue) => {

@@ -1,5 +1,5 @@
 import store from './store';
-import { treatments } from './treatments';
+import treatments from './treatments';
 import { toggleyApi } from './featureProviders';
 
 export const isEnabled = async (featureName, userId) => {

@@ -1,4 +1,4 @@
-import { isEnabled } from '../entrypoint';
+import { isEnabled } from '../main';
 import { toggleyApi } from '../featureProviders';
 
 jest.mock('../featureProviders');

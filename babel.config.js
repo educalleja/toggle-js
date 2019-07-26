@@ -1,19 +1,13 @@
-module.exports = function(api) {
+module.exports = function (api) {
+  const targets = api.env('test') ? { node: 'current' } : '> 0.25%, not dead';
   api.cache(true);
-
   const presets = [
     [
-      "@babel/env",
+      "@babel/preset-env",
       {
-        targets: {
-          ie: 11,
-          edge: "17",
-          firefox: "60",
-          chrome: "67",
-          safari: "11.1"
-        },
-        corejs: "3",
-        useBuiltIns: "usage"
+        corejs: 3,
+        useBuiltIns: "entry",
+        targets
       }
     ]
   ];

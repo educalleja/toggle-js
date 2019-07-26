@@ -5,9 +5,9 @@ test('Requests are done to production endpoints with headers', async () => {
     get: jest.fn(),
   };
 
-  const api = toggleyAPI({ httpLib });
+  const api = toggleyAPI(httpLib);
 
-  await api.getTreatmentsFromService({ userId: 'userABC' });
+  await api.getTreatmentsFromService('userABC');
 
   expect(httpLib.get).toHaveBeenCalledWith('https://toggley.io/treatments/userABC', {});
 });
@@ -20,9 +20,9 @@ test('Requests treatments from API', async () => {
       treatment3: true,
     }),
   };
-  const api = toggleyAPI({ getHeaders: () => ({}), httpLib });
+  const api = toggleyAPI(httpLib);
 
-  const treatments = await api.getTreatmentsFromService({ userId: 'user123' });
+  const treatments = await api.getTreatmentsFromService('user123');
 
   expect(treatments).toEqual({
     treatment1: true,

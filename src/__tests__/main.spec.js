@@ -1,20 +1,20 @@
 import { isEnabled } from '../main';
-import { toggleyApi } from '../featureProviders';
+import provider from '../featureProviders';
 
 jest.mock('../featureProviders');
 
 test.each([true, false])('Returns %s when feature is set to that value', async (valueFeature) => {
-  toggleyApi.getTreatmentsFromService = jest.fn().mockReturnValue({
-    feature1234: valueFeature,
-  });
+  provider.mockImplementation(() => ({
+    getTreatmentsFromService: () => ({ feature1234: valueFeature }),
+  }));
   const result = await isEnabled('feature1234', 'userId1');
   expect(result).toBe(valueFeature);
 });
 
 test('Returns false when feature is not set for a user', async () => {
-  toggleyApi.getTreatmentsFromService = jest.fn().mockReturnValue({
-    feature1234: false,
-  });
+  provider.mockImplementation(() => ({
+    getTreatmentsFromService: () => ({}),
+  }));
   const result = await isEnabled('feature1234', 'userId1');
   expect(result).toBeFalsy();
 });

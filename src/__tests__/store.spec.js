@@ -1,27 +1,24 @@
-// import { getTreatmentFromStore, setStore, isStoreLoaded } from '../store';
 import store from '../store';
 
 test.each([[true], [false]])(
   'should return %s when a feature is set to the same value.',
   (treatmentStatus) => {
-    const userId = 'user123';
     const featureName = 'featureABC';
     const myStore = store();
 
     myStore.setStore({ featureABC: treatmentStatus });
-    const treatment = myStore.getTreatmentFromStore({ featureName, userId });
+    const treatment = myStore.getTreatmentFromStore(featureName);
 
     expect(treatment).toBe(treatmentStatus);
   },
 );
 
 it('should return false when a feature is not set', () => {
-  const userId = 'user123';
   const featureName = 'featureXYZ';
   const myStore = store();
 
   myStore.setStore({ featureABC: false });
-  const treatment = myStore.getTreatmentFromStore({ featureName, userId });
+  const treatment = myStore.getTreatmentFromStore(featureName);
 
   expect(treatment).toBe(false);
 });

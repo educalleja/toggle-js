@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "build:web": "rimraf dist/ && webpack --config webpack.config.js",
-    "build:package": "rimraf dist/ && babel src -d dist-babel --ignore src/**/*.spec.js,src/**/*.test.js",
+    "build:package": "rimraf dist/ && babel src -d lib --ignore src/**/*.spec.js,src/**/*.test.js",
     "test": "jest",
     "start": "npm run build && node dist/index.js",
     "lint": "eslint src/**",

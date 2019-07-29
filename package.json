@@ -2,7 +2,7 @@
   "name": "toggley-js",
   "version": "0.0.1",
   "description": "",
-  "main": "src/index.js",
+  "main": "src/package.js",
   "scripts": {
     "build:web": "rimraf dist/ && webpack --config webpack.config.js",
     "build:package": "rimraf dist/ && babel src -d lib --ignore src/**/*.spec.js,src/**/*.test.js",

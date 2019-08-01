@@ -14,7 +14,7 @@ module.exports = [
 ].map(({ mode, devtool, dest }) => ({
   mode,
   devtool,
-  entry: './src/main.js',
+  entry: './src/browser.js',
   output: {
     path: dest,
     filename: 'toggley.js',

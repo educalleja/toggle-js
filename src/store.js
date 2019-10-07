@@ -1,17 +1,15 @@
-export default () => {
+export default function () {
   let store = {};
   let isLoaded = false;
 
-  const getTreatmentFromStore = featureName => store[featureName] || false;
-
-  const setStore = (newStore) => {
+  function setStore(newStore) {
     store = newStore;
     isLoaded = true;
-  };
+  }
 
   return {
-    getTreatmentFromStore,
     setStore,
+    getTreatmentFromStore: featureName => store[featureName] || false,
     isLoaded: () => isLoaded,
   };
-};
+}

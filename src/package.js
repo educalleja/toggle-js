@@ -1,18 +1,20 @@
 import treatments from './treatments';
 import getConfig from './config';
 
-let config;
+let configuration;
+let treats;
+
 export function init(token, getConfiguration = getConfig) {
-  config = getConfiguration(token);
+  configuration = getConfiguration(token);
+  treats = treatments({ ...configuration });
 }
 
 export async function isEnabled(featureName, userId) {
-  if (!config) {
+  if (!configuration || !treats) {
     throw new Error('Toggley - You must call the init function before with your API token');
   }
   if (!userId || !featureName) {
     throw new Error('Toggley - Insufficient parameters');
   }
-  const treats = treatments({ ...config });
   return treats.isEnabledForUser(featureName, userId);
 }

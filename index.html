@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <script src="dist/dev/toggley.js?key=a1234" ></script>
+        <style>
+            .pass {
+                background-color: #036803;
+                color: #ffffff;
+            }
+            .fail {
+                background-color: #ff4500;
+            }
+        </style>
+    </head>
+    <body>
+        <p>Test the integration with await window.Toggley.isEnabled('feature1', 'user123');</p>    
+        <p>Result:</p>
+        <div id="resultBody"></div>
+        <div id="issues"></div>
+    </body>
+    <script>
+        function assert(field, value, expectedValue) {
+            if (value != expectedValue) {
+                document.getElementById('resultBody').innerHTML = "FAIL";
+                var issue = field+ ": Expected value "+ expectedValue + " but got: "+ value;
+                document.getElementById('issues').innerHTML += issue;
+            }
+        }
+
+        var headers = {}, method, url;
+        var result;
+        
+        var originalOpen = XMLHttpRequest.prototype.open;
+        XMLHttpRequest.prototype.open = function(methodAjax, urlAjax) {
+            console.log(method);
+            method = methodAjax;
+            url = urlAjax;
+            originalOpen.apply(this, [].slice.call(arguments));
+        };
+        var setRequestHeader = XMLHttpRequest.prototype.setRequestHeader;
+        XMLHttpRequest.prototype.setRequestHeader  = function(header, value) {
+            headers[header] = value;
+            setRequestHeader.apply(this, [].slice.call(arguments));
+        }
+
+        window.Toggley.isEnabled('feature1', 'user123').catch(() => {
+            assert("method", method, "GET");
+            assert("call url", url, "https://toggley.io/treatments/user123");
+            assert("Authorization header", headers.Authorization, "Bearer a1234");
+
+            if (document.getElementById("resultBody").innerHTML == "") {
+                document.getElementById("resultBody").innerHTML = "PASS";
+                document.getElementById("resultBody").setAttribute("class", "pass");
+            } 
+            else{
+                document.getElementById("resultBody").setAttribute("class", "fail");
+            }
+        });
+    </script>
+</html>

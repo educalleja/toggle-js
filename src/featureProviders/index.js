@@ -1,8 +1,8 @@
 import httpLib from '../services/http';
-import toggleyAPI from './toggleyApi';
+import educallejaAPI from './educalleja.es';
 
 export default function (KEY) {
   return {
-    ...toggleyAPI(KEY, httpLib),
+    ...educallejaAPI(KEY, httpLib),
   };
 }
